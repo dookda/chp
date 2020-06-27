@@ -1,0 +1,48 @@
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    font-family: 'Mitr', sans-serif !important;
+}
+
+body {
+    font-family: "Kanit",sans-serif !important;
+    font-size: 14px !important;
+    line-height: 1.72222;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+}
+
+#map{
+    height: 50vh; 
+    width: 100%;
+    border-radius: 0.4rem;
+}
+
+.jumbotron {
+    padding: 1rem 1rem !important;
+}
+
+.fx{
+    height: 40vh; 
+    width: 100%;
+    overflow: auto;
+}
+
+.inp{
+    border: none;
+    background-color: whitesmoke;
+}
+.gray{
+    padding: 5px;
+    background-color: #f0f5f5;
+    border-radius: 0.4rem;
+}
+
+
+

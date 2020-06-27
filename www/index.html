@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>children health profile</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mitr&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Kanit&display=swap">
+  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol/dist/L.Control.Locate.min.css" />
+  <!-- <link rel="stylesheet" href="./bootstrap.min.css"> -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <a class="navbar-brand" href="#">children health profile</a>
+  </nav>
+  <div class="container-fluid">
+    <div class="col-12">
+      <div class="row">
+        <div class="col-xs-4">
+          <div id="card">
+            <img alt="" id="profile">
+          </div>
+
+        </div>
+        <div class="col-xs-4 ml-1">
+          <h5> <span class="badge badge-info" id="displayName"></span></h5>
+          <span id="statusMessage"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <form class="mt-1 mb-3" id="fieldForm">
+      <div class="form-group">
+        <legend class="gray">วันที่เก็บข้อมูล</legend>
+        <input type="date" class="form-control" id="dateCollect">
+      </div>
+
+      <fieldset class="form-group">
+        <legend class="gray">สถานศึกษา</legend>
+        <div class="row">
+          <div class="col-6">
+            <div class="form-check">
+              <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="schoolName" id="option1"
+                  value="เทศบาล1(วัดน้อย)">เทศบาล1(วัดน้อย)</label>
+            </div>
+            <div class="form-check">
+              <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="schoolName" id="option2"
+                  value="เทศบาล2(วัดคูหาสวรรค์)">เทศบาล2(วัดคูหาสวรรค์)</label>
+            </div>
+            <div class="form-check disabled">
+              <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="schoolName" id="option3"
+                  value="เทศบาล 3 (วัดท่ามะปราง)">เทศบาล 3 (วัดท่ามะปราง)</label>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="form-check disabled">
+              <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="schoolName" id="option4"
+                  value="ทศบาล 5 (วัดพันปี)">เทศบาล 5 (วัดพันปี)</label>
+            </div>
+            <div class="form-check disabled">
+              <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="schoolName" id="option6"
+                  value="ศพด.คนตรง">ศพด.คนตรง</label>
+            </div>
+            <div class="form-check disabled">
+              <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="schoolName" id="option7"
+                  value="ศพด.นครพิษณุโลก">ศพด.นครพิษณุโลก</label>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+
+      <div class="form-group">
+        <legend class="gray">ชื่อ:</legend>
+        <input type="text" class="form-control" id="stdName" required>
+      </div>
+
+      <fieldset class="form-group">
+        <legend class="gray">เพศ</legend>
+        <div class="row">
+          <div class="col-6">
+            <div class="form-check">
+              <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="sex" id="sex1" value="ชาย">ชาย</label>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="form-check">
+              <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="sex" id="sex2" value="หญิง">หญิง</label>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+
+      <div class="form-group">
+        <legend class="gray">อายุ:</legend>
+        <input type="number" class="form-control" id="stdAge">
+      </div>
+
+      <fieldset class="form-group">
+        <legend class="gray">ระดับชั้น:</legend>
+        <div class="row">
+          <div class="col-6">
+            <div class="form-check">
+              <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="className" id="nurse1"
+                  value="อนุบาล1">อนุบาล1</label>
+            </div>
+            <div class="form-check">
+              <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="className" id="nurse2"
+                  value="อนุบาล2">อนุบาล2</label>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="form-check">
+              <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="className" id="nurse3"
+                  value="อนุบาล3">อนุบาล3</label>
+            </div>
+            <div class="form-check">
+              <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="className" id="nurse4"
+                  value="ปฐมศึกษา">ปฐมศึกษา</label>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+
+      <div class="form-group">
+        <legend class="gray">วันที่เริ่มป่วย</legend>
+        <input type="date" class="form-control" id="dateSick">
+      </div>
+
+      <div class="form-group">
+        <legend class="gray">วันที่ไม่มาโรงเรียน</legend>
+        <input type="date" class="form-control" id="dateAbsent">
+      </div>
+
+      <fieldset class="form-group">
+        <legend class="gray">การเดินทางมาโรงเรียน:</legend>
+        <div class="row">
+          <div class="col-4">
+            <div class="form-check">
+              <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="disease" value="มือ เท้า ปาก">มือ เท้า ปาก</label>
+            </div>
+            <div class="form-check">
+              <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="disease" value="อุจจาระร่วง">อุจจาระร่วง</label>
+            </div>
+            <div class="form-check">
+              <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="disease" value="อาหารเป็นพิษ">อาหารเป็นพิษ
+              </label>
+            </div>
+            <div class="form-check">
+              <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="disease" value="อื่นๆ">อื่นๆ
+              </label>
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="form-check">
+              <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="disease" value="ไข้หวัดใหญ่">ไข้หวัดใหญ่
+              </label>
+            </div>
+            <div class="form-check">
+              <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="disease" value="ไข้เลือดออก">ไข้เลือดออก
+              </label>
+            </div>
+            <div class="form-check">
+              <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="disease" value="ไข้ออกผื่น">ไข้ออกผื่น
+              </label>
+            </div>
+          </div>
+
+          <div class="col-4">
+            <div class="form-check">
+              <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="disease" value="ตาแดง">ตาแดง
+              </label>
+            </div>
+            <div class="form-check">
+              <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="disease" value="อีสุกอีใส">อีสุกอีใส
+              </label>
+            </div>
+            <div class="form-check">
+              <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="disease" value="ไข้ออกผื่น">คางทูม
+              </label>
+            </div>
+          </div>
+
+        </div>
+      </fieldset>
+
+      <div class="form-group">
+        <legend class="gray">ใบรับรองแพทย์</legend>
+        <input type="file" accept="image/*" name="imgfile" id="imgfile">
+        <p></p>
+        <small id="fileHelp" class="form-text text-muted">อัพโหลดไฟล์ใบรับรองแพทย์</small>
+        <img src="" id="preview" width="250px">
+      </div>
+
+      <fieldset class="form-group">
+        <legend class="gray">การเดินทางมาโรงเรียน:</legend>
+        <div class="row">
+          <div class="col-6">
+            <div class="form-check">
+              <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="travel" value="ผู้ปกครองมาส่ง">ผู้ปกครองมาส่ง</label>
+            </div>
+            <div class="form-check">
+              <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="travel"
+                  value="รถโดยสารประจําทาง">รถโดยสารประจําทาง</label>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="form-check">
+              <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="travel" value="อนุบาล3">อื่น ๆ
+              </label>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+      <div class="form-group">
+        <legend class="gray">ที่อยู่ขณะป่วย</legend>
+        <input type="text" class="form-control" id="sickLocation">
+      </div>
+
+      <div class="form-group">
+        <span id="fileHelp" class="form-text text-muted">โปรดระบุตำแหน่ง</span>
+        <div class="card mt-1 p-0">
+          <div id="map"></div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <legend class="gray">เบอร์โทรติดต่อ (ผู้ปกครอง)</legend>
+        <input type="text" class="form-control" id="phone">
+      </div>
+      <hr>
+      <div>
+        <button type="button" id="addData" class="btn btn-success" onclick="saveData()">ส่งข้อมูล</button>
+        <button type="button" id="refresh" class="btn btn-outline-info" onclick="refreshPage()">refresh</button>
+      </div>
+
+    </form>
+
+  </div>
+  <p></p>
+</body>
+<script src="https://static.line-scdn.net/liff/edge/2.1/sdk.js"></script>
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol/dist/L.Control.Locate.min.js" charset="utf-8"></script>
+<!-- <script src="marker.js"></script> -->
+<script src="app.js"></script>
+
+</html>
